@@ -32,3 +32,30 @@ integer arithmetic expressions.
 
 The resulting `test.exe` will exit with the value computed in the `return`
 statement. Only very basic integer expressions are supported.
+
+## SwiftPhysicsEngine
+
+This repository also includes **SwiftPhysicsEngine**, a minimal 2D physics engine written in Swift. The engine is designed for educational purposes and showcases how to implement vectors, rigid bodies, collision detection, and impulse resolution.
+
+### Building and Testing
+
+Run the unit tests using Swift Package Manager:
+
+```bash
+swift test
+```
+
+### Example Usage
+
+```
+import SwiftPhysicsEngine
+
+let world = World()
+let body = Body(position: Vec2(x: 0, y: 10), mass: 1)
+let shape = PhysicsBodyComponent(rigidBody: body, shape: PhysicsCircle(radius: 1))
+world.addBody(shape)
+world.step(deltaTime: 1.0)
+print(body.position)
+```
+
+This will simulate a single step with gravity acting on the body.
