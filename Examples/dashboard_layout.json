@@ -1,0 +1,67 @@
+{
+  "title": "Product Analytics Dashboard",
+  "theme": {
+    "body": {
+      "fontFamily": "Inter, system-ui, sans-serif",
+      "backgroundColor": "#f5f5f7",
+      "margin": "0",
+      "padding": "2rem"
+    },
+    "components": {
+      ".panel": {
+        "backgroundColor": "#fff",
+        "borderRadius": "12px",
+        "boxShadow": "0 10px 30px rgba(26, 26, 67, 0.08)",
+        "padding": "1.5rem"
+      },
+      ".primary": {
+        "backgroundColor": "#4f46e5",
+        "color": "#fff",
+        "border": "none",
+        "padding": "0.75rem 1.5rem",
+        "borderRadius": "999px",
+        "cursor": "pointer"
+      }
+    }
+  },
+  "customCss": ".grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }",
+  "components": [
+    {
+      "type": "container",
+      "className": "grid",
+      "children": [
+        {
+          "type": "container",
+          "className": "panel",
+          "children": [
+            {"type": "text", "tag": "h1", "text": "Weekly Summary"},
+            {"type": "text", "tag": "p", "text": "Monitor retention, engagement, and conversion at a glance."},
+            {"type": "button", "className": "primary", "text": "Create Report"}
+          ]
+        },
+        {
+          "type": "container",
+          "className": "panel",
+          "children": [
+            {"type": "text", "tag": "h2", "text": "Active Users"},
+            {"type": "text", "tag": "p", "text": "68,420 monthly active"},
+            {"type": "text", "tag": "p", "text": "+12% vs last month"}
+          ]
+        },
+        {
+          "type": "container",
+          "className": "panel",
+          "children": [
+            {"type": "text", "tag": "h2", "text": "Funnels"},
+            {"type": "text", "tag": "p", "text": "86% onboarding completion"},
+            {
+              "type": "input",
+              "placeholder": "Filter segment",
+              "attributes": {"aria-label": "Filter funnel"}
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
