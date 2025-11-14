@@ -59,3 +59,46 @@ print(body.position)
 ```
 
 This will simulate a single step with gravity acting on the body.
+
+## Interface Builder for Web Apps
+
+Need to sketch product dashboards or marketing pages without hand-writing HTML
+every time? The repository now ships with `web_interface_builder.py`, a tiny
+interface builder that turns JSON layout descriptions into static HTML.
+
+### Usage
+
+1. Describe your layout in JSON. The `Examples/dashboard_layout.json` file shows
+   a full specification including theming, reusable class selectors, and nested
+   components.
+2. Run the builder to turn the JSON into HTML:
+
+   ```bash
+   python web_interface_builder.py Examples/dashboard_layout.json build/dashboard.html
+   ```
+
+   If you omit the second argument the script will emit an `.html` file next to
+   your JSON spec automatically.
+3. Open the generated HTML in a browser to review the interface, tweak the JSON
+   as needed, and regenerate.
+
+Supported component types today include `container`, `text`, `button`, `input`,
+and `image`. Each component can opt into inline styles, extra attributes (for
+ARIA labels, test hooks, etc.), and nested children to approximate the behavior
+of visual interface builders. Components can also declare `actions` that feel
+like IBAction hooks: supply an event (e.g. `click`) and the name of a handler,
+and the builder will emit the appropriate `onclick`/`oninput` attributes so your
+JavaScript handlers receive `(event, element, ...args)` without extra wiring.
+
+To keep behavior alongside layout, add a `scripts` array at the top level of the
+spec. Each entry can be either an inline string (wrapped in `<script>` tags) or a
+mapping specifying `src` and/or a `code` block. This makes it easy to ship
+handlers such as:
+
+```json
+"scripts": [
+  {
+    "code": "function handleCreateReport(event, element) { alert('Clicked!'); }"
+  }
+]
+```
