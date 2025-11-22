@@ -37,6 +37,47 @@ statement. Only very basic integer expressions are supported.
 
 This repository also includes **SwiftPhysicsEngine**, a minimal 2D physics engine written in Swift. The engine is designed for educational purposes and showcases how to implement vectors, rigid bodies, collision detection, and impulse resolution.
 
+## ArchiveOrgClient (Swift)
+
+`ArchiveOrgClient` is a small Swift package for interacting with the Archive.org API from iOS or macOS apps. It wraps common endpoints such as advanced search, item metadata, and file downloads using Swift concurrency.
+
+### Adding the Package
+
+Add this repository as a dependency in your `Package.swift`:
+
+```
+.package(url: "https://github.com/your/repo.git", from: "1.0.0")
+```
+
+Then depend on the library product:
+
+```
+ .target(
+     name: "YourAppTarget",
+     dependencies: [
+         .product(name: "ArchiveOrgClient", package: "SwiftPhysicsEngine")
+     ]
+ )
+```
+
+### Example Usage
+
+```
+import ArchiveOrgClient
+
+let client = ArchiveOrgClient()
+
+Task {
+    let results = try await client.search(query: "collection:(smithsonian)")
+    print("Found \(results.numFound) items")
+
+    if let identifier = results.docs.first?.identifier {
+        let metadata = try await client.itemMetadata(identifier: identifier)
+        print("First file: \(metadata.files.first?.name ?? "n/a")")
+    }
+}
+```
+
 ### Building and Testing
 
 Run the unit tests using Swift Package Manager:
